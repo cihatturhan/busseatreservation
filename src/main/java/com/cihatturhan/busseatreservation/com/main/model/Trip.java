@@ -45,7 +45,7 @@ public class Trip {
 	private String code;
 	
 	@NotNull
-	private City deraptureCity;
+	private City departureCity;
 	
 	@NotNull
 	private City arrivalCity;
@@ -96,12 +96,16 @@ public class Trip {
 		this.code = code;
 	}
 
-	public City getDeraptureCity() {
-		return deraptureCity;
+
+
+
+
+	public City getDepartureCity() {
+		return departureCity;
 	}
 
-	public void setDeraptureCity(City deraptureCity) {
-		this.deraptureCity = deraptureCity;
+	public void setDepartureCity(City departureCity) {
+		this.departureCity = departureCity;
 	}
 
 	public City getArrivalCity() {

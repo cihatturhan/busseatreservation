@@ -15,6 +15,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
+
 
 @Entity
 @Table(name="bus")
@@ -33,6 +35,13 @@ public class Bus {
 	@NotNull
 	@Size(min = 2, max = 30)
 	private String name;
+	
+	@NotNull
+	@Range(min=2, max=50)
+	private int numberOfSeat;
+	
+	
+	private boolean hasAnyReservation;
 
 	
 	
@@ -59,6 +68,24 @@ public class Bus {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	
+
+	public int getNumberOfSeat() {
+		return numberOfSeat;
+	}
+
+	public void setNumberOfSeat(int numberOfSeat) {
+		this.numberOfSeat = numberOfSeat;
+	}
+
+	public boolean isHasAnyReservation() {
+		return hasAnyReservation;
+	}
+
+	public void setHasAnyReservation(boolean hasAnyReservation) {
+		this.hasAnyReservation = hasAnyReservation;
 	}
 
 	public List<Trip> getTrips() {

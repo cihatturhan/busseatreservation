@@ -31,7 +31,7 @@ public class Seat {
 	
 	@NotNull
 	private String seatNumber;
-	
+		
 	@ManyToOne
 	@JoinColumn(name="bus_id")
 	private Bus bus;
