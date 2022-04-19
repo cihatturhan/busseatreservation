@@ -31,12 +31,49 @@
 	    </div>
 	  </div>
 	 </nav>
-	 
-    <h1>Hello, world!</h1>
-      <a th:if="${#httpServletRequest.remoteUser}" href="/logout"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button></a>
-      <a th:unless="${#httpServletRequest.remoteUser}" href="/login"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button></a>
-    
+<div class="container">
+		<div class="row">
+			<h1>List of available Buses</h1>
+		</div>
+		
+		<div class="row">
+			<table class="table table-hover" th:if="${!busses.empty}">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Name</th>
+						<th scope="col">Number Of Seat</th>
+						<th scope="col">Add To Trip</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="bus : ${busses}">
+						<td th:text="${busStat.count}"></td>
+						<td th:text="${bus.name}"></td>
+						<td th:text="${bus.numberOfSeat}"></td>
+						<td>
+							<form action="#" th:action="@{/processTripToBuesFrom/} + ${trip.id}" th:object="${bus}" method="post">
+							<div class="form-group">
+								<input type="hidden" class="form-control" name="bus" th:value="${bus.id}" >
+							</div>
 
+							<input class="btn btn-success float-left" type="submit" value="Submit">
+							</form>
+						</td>
+
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="row" th:if="${busses.empty}">
+			<h3>There is no Bus</h3>
+		</div>
+		
+		<div class="row">
+			<a th:href="@{/}" class="btn btn-warning">Back</a>
+		</div>
+	</div>
   <div class="border border-success">
             <p>Spring security examples</p>
             <div class="bg-primary text-white" sec:authorize="hasRole('ADMIN')">This part is visible to the admin</div>
@@ -55,10 +92,7 @@
 
    
 </div>
-<a href="addBus">Add Bus</a>
-<a href="addTrip">Add Trip</a>
-<a href="showTrips"> Show Trips</a>
-
+<a href="test">index</a>
 
  
 

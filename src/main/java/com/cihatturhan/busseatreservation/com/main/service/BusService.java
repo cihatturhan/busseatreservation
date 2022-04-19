@@ -14,6 +14,5 @@ public interface BusService {
 
 	public List<Bus> getAll();
 
-	public void createSeatsForBus(Bus bus, int numberOfSeats);
 
 }

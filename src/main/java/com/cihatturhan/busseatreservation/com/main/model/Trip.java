@@ -3,14 +3,15 @@ package com.cihatturhan.busseatreservation.com.main.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
@@ -21,35 +22,32 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.cihatturhan.busseatreservation.com.main.enums.City;
 
-
 @Entity
-@Table(name="trip")
+@Table(name = "trip")
 public class Trip {
 
 	public Trip() {
-		
+
 	}
-
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@NotNull
 	@Size(min = 2, max = 30)
 	private String name;
-	
+
 	@NotNull
-	@Pattern(regexp = "^([A-Z]){2}-([A-Z]){2}", message="Excepted format is LL-LL where L stands for Lethers")
+	@Pattern(regexp = "^([A-Z]){2}-([A-Z]){2}", message = "Excepted format is LL-LL where L stands for Lethers")
 	private String code;
-	
+
 	@NotNull
 	private City departureCity;
-	
+
 	@NotNull
 	private City arrivalCity;
-	
+
 	@Future
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "departure_date")
@@ -65,12 +63,15 @@ public class Trip {
 
 	@Column(name = "arrival_time")
 	private String arrivalTime;
+
+	@ManyToOne
+	@JoinColumn(name = "bus_id")
+	private Bus bus;;
+
+	@OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
+	private List<Seat> seats;
 	
-	@ManyToMany
-	@JoinTable(name="bus2trip",
-				joinColumns= @JoinColumn(name="trip_id"),
-				inverseJoinColumns= @JoinColumn(name="bus_id"))
-	private List<Bus> buses;
+	private boolean hasAnyReservation;
 
 	public int getId() {
 		return id;
@@ -95,10 +96,6 @@ public class Trip {
 	public void setCode(String code) {
 		this.code = code;
 	}
-
-
-
-
 
 	public City getDepartureCity() {
 		return departureCity;
@@ -148,15 +145,30 @@ public class Trip {
 		this.arrivalTime = arrivalTime;
 	}
 
-	public List<Bus> getBuses() {
-		return buses;
+	public Bus getBus() {
+		return bus;
 	}
 
-	public void setBuses(List<Bus> buses) {
-		this.buses = buses;
+	public void setBus(Bus bus) {
+		this.bus = bus;
+	}
+
+	public List<Seat> getSeats() {
+		return seats;
+	}
+
+	public void setSeats(List<Seat> seats) {
+		this.seats = seats;
+	}
+
+	public boolean isHasAnyReservation() {
+		return hasAnyReservation;
+	}
+
+	public void setHasAnyReservation(boolean hasAnyReservation) {
+		this.hasAnyReservation = hasAnyReservation;
 	}
 	
 	
-
 
 }

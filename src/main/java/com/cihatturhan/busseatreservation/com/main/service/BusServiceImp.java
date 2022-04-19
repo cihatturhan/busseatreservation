@@ -20,18 +20,14 @@ public class BusServiceImp implements BusService {
 
 	@Autowired
 	BusRepository busRepository;
-	
+
 	@Autowired
 	SeatRepository seatRepository;
-	
 
 	@Override
 	public void saveOrUpdate(Bus bus) {
 
 		bus = busRepository.saveAndFlush(bus);
-		createSeatsForBus(bus, bus.getNumberOfSeat());
-
-		
 
 	}
 
@@ -52,21 +48,6 @@ public class BusServiceImp implements BusService {
 	public List<Bus> getAll() {
 
 		return busRepository.findAll();
-	}
-
-	@Override
-	public void createSeatsForBus(Bus bus, int numberOfSeats) {
-		List<Seat> seats= new ArrayList<Seat>();
-		
-		for(int i=1; i <= numberOfSeats;i++) {
-			Seat seat = new Seat();
-			seat.setSeatNumber(String.valueOf(i));
-			seat.setBus(bus);
-			seat.setSeatStatus( SeatStatus.AVAILABLE);
-			seats.add(seat);
-		}
-		seatRepository.saveAll(seats);
-		
 	}
 
 }

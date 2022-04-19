@@ -33,8 +33,8 @@ public class Seat {
 	private String seatNumber;
 		
 	@ManyToOne
-	@JoinColumn(name="bus_id")
-	private Bus bus;
+	@JoinColumn(name="trip_id")
+	private Trip trip;
 	
 	@ManyToOne
 	@JoinColumn(name="user_id")
@@ -58,13 +58,6 @@ public class Seat {
 		this.seatNumber = seatNumber;
 	}
 
-	public Bus getBus() {
-		return bus;
-	}
-
-	public void setBus(Bus bus) {
-		this.bus = bus;
-	}
 
 	public User getUser() {
 		return user;
@@ -81,6 +74,16 @@ public class Seat {
 	public void setSeatStatus(SeatStatus seatStatus) {
 		this.seatStatus = seatStatus;
 	}
+
+	public Trip getTrip() {
+		return trip;
+	}
+
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+	}
+	
+	
 	
 	
 

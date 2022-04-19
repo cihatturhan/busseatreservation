@@ -17,16 +17,13 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 
-
 @Entity
-@Table(name="bus")
+@Table(name = "bus")
 public class Bus {
 
 	public Bus() {
-		
+
 	}
-
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,24 +32,13 @@ public class Bus {
 	@NotNull
 	@Size(min = 2, max = 30)
 	private String name;
-	
-	@NotNull
-	@Range(min=2, max=50)
-	private int numberOfSeat;
-	
-	
-	private boolean hasAnyReservation;
 
-	
-	
-	@ManyToMany
-	@JoinTable(name="bus2trip",
-				joinColumns= @JoinColumn(name="bus_id"),
-				inverseJoinColumns= @JoinColumn(name="trip_id"))
-	private List<Trip> trips;
-	
+	@NotNull
+	@Range(min = 2, max = 50)
+	private int numberOfSeat;
+
 	@OneToMany(mappedBy = "bus", cascade = CascadeType.ALL)
-	private List<Seat> seats;
+	private List<Trip> trips;
 
 	public int getId() {
 		return id;
@@ -69,8 +55,6 @@ public class Bus {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
 
 	public int getNumberOfSeat() {
 		return numberOfSeat;
@@ -80,14 +64,6 @@ public class Bus {
 		this.numberOfSeat = numberOfSeat;
 	}
 
-	public boolean isHasAnyReservation() {
-		return hasAnyReservation;
-	}
-
-	public void setHasAnyReservation(boolean hasAnyReservation) {
-		this.hasAnyReservation = hasAnyReservation;
-	}
-
 	public List<Trip> getTrips() {
 		return trips;
 	}
@@ -95,16 +71,7 @@ public class Bus {
 	public void setTrips(List<Trip> trips) {
 		this.trips = trips;
 	}
-
-	public List<Seat> getSeats() {
-		return seats;
-	}
-
-	public void setSeats(List<Seat> seats) {
-		this.seats = seats;
-	}
 	
 	
-
 
 }
