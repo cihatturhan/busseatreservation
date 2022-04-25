@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -32,12 +33,15 @@ public class User {
 	@Size(min=2, max=30)
 	private String username;
 	
+	@NotBlank
     @Email(message = "Email is not valid")
     private String email;
     
+	@NotBlank
     @Column(length = 68) //68 default şifre encrypte boyutu
 	private String password;
     
+    @NotNull
     @Transient
 	private String confirmedPassword;
     

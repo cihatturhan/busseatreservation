@@ -31,7 +31,83 @@
 	    </div>
 	  </div>
 	 </nav>
-	 
+	 <div class="container">
+		<div class="row">
+			<div class="col-sm">
+			</div>
+			
+			<div class="col-sm-8">
+				<h1>Edit Trip</h1>
+				
+				<form action="#" th:action="@{/processTripForm}" th:object="${trip}" method="post">
+				
+					<div class="form-group">
+						<input type="hidden" th:field="*{id}">
+					</div>
+					<div class="form-group">
+						<label>Name</label>
+						<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+						<input type="text" class="form-control" th:field="*{name}">
+					</div>
+					<div class="form-group">
+						<label>Code</label>
+						<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
+						<input type="text" class="form-control" th:field="*{code}">
+						<small class="form-text text-muted">Expected format: LL-LL where L-letter</small>
+					</div>
+					<div class="form-group">
+						<label>Departure City</label>
+						<select name="departureCity" class="form-control">
+							<option th:each="departureCity : ${T(com.cihatturhan.busseatreservation.com.main.enums.City).values()}"
+									th:value="${departureCity}" th:text="${departureCity}"></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Departure date</label>
+						<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('departureDate')}" th:errors="*{departureDate}"></div>
+						<input type="date" class="form-control" th:field="*{departureDate}">
+					</div>
+					<div class="form-group">
+						<label>Departure Time</label>
+						<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('departureTime')}" th:errors="*{departureTime}"></div>
+						<input type="time" class="form-control" th:field="*{departureTime}">
+				    </div>
+					<div class="form-group">
+						<label>Arrival City</label>
+						<select name="arrivalCity" class="form-control">
+							<option th:each="arrivalCity : ${T(com.cihatturhan.busseatreservation.com.main.enums.City).values()}"
+									th:value="${arrivalCity}" th:text="${arrivalCity}"></option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Arrival date</label>
+						<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('arrivalDate')}" th:errors="*{arrivalDate}"></div>
+						<input type="date" class="form-control" th:field="*{arrivalDate}">
+					</div>
+					<div class="form-group">
+						<label>Arrival Time</label>
+						<div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('arrivalTime')}" th:errors="*{arrivalTime}"></div>
+						<input type="time" class="form-control" th:field="*{arrivalTime}">
+				    </div>
+
+					<div class="form-row">
+						<div class="col float-left">
+							<input class="btn btn-success float-left" type="submit" value="Submit">
+						</div>
+						<div class="float-right">
+
+							
+						</div>
+					</div>
+					
+				</form>
+				<a th:href="@{/}" class="btn btn-warning float-right">Back</a>
+			</div>
+			
+			<div class="col-sm">
+			</div>
+		</div>
+	</div>
     <h1>Hello, world!</h1>
       <a th:if="${#httpServletRequest.remoteUser}" href="/logout"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button></a>
       <a th:unless="${#httpServletRequest.remoteUser}" href="/login"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button></a>
@@ -55,12 +131,7 @@
 
    
 </div>
-<a href="addBus">Add Bus</a>
-<a href="addTrip">Add Trip</a>
-<a href="showTrips"> Show Trips</a>
-<a href="showBuses"> Show Buses</a>
-<a href="addUser"> Add User</a>
-
+<a href="test">index</a>
 
  
 

@@ -7,5 +7,9 @@ import com.cihatturhan.busseatreservation.com.main.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
+	
+	public boolean existsByUsername(String username);
+	
+	public User findByUsername(String username);
 
 }

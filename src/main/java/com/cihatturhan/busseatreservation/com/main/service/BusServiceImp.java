@@ -27,7 +27,7 @@ public class BusServiceImp implements BusService {
 	@Override
 	public void saveOrUpdate(Bus bus) {
 
-		bus = busRepository.saveAndFlush(bus);
+		busRepository.save(bus);
 
 	}
 

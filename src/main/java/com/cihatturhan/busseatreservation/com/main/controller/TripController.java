@@ -58,7 +58,7 @@ public class TripController {
 		Trip trip = tripService.getById(tripId);
 		List<Bus> busses = busService.getAll();
 		model.addAttribute("trip",trip);
-		model.addAttribute("busses", busses);
+		model.addAttribute("buses", busses);
 		
 		return "trips-to-bus-form";
 	}
@@ -73,5 +73,11 @@ public class TripController {
 		tripService.saveOrUpdate(trip);
 		return "redirect:/";
 
+	}
+	@GetMapping("/editTrip/{tripId}")
+	public String editTrip(@PathVariable int tripId, Model model) {
+		Trip trip = tripService.getById(tripId);
+		model.addAttribute("trip", trip);
+		return "trip-edit-form";
 	}
 }
